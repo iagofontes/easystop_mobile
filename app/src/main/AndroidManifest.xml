@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".EstacionamentosActivity">
         </activity>
-        <activity android:name=".CadastroActivity">
+        <activity android:name=".RegisterActivity">
         </activity>
         <activity
                 android:name=".MainActivity"
@@ -38,6 +38,8 @@
         <activity
                 android:name=".PrincipalActivity"
                 android:label="@string/title_activity_principal">
+        </activity>
+        <activity android:name=".CarsActivity">
         </activity>
     </application>
 

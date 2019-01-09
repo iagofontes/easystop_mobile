@@ -1,5 +1,6 @@
 package br.com.iagofontes.easystop
 
+import android.content.Context
 import android.content.Intent
 import android.inputmethodservice.Keyboard
 import android.support.v7.app.AppCompatActivity
@@ -28,12 +29,14 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
+        keepConected(false)
+
         btnLogin.setOnClickListener {
             loginClient()
         }
 
         btnCadastrar.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, CadastroActivity::class.java))
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
 
     }
@@ -63,10 +66,8 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<BasicReturn>, response: Response<BasicReturn>?) {
-//                    Keyboard.KEYCODE_DONE
                     if((response?.isSuccessful == true) && (response?.code() == 200)) {
-//                        verificar se está selecionado para manter-se conectado
-//                        caso esteja preciso salvar os dados para lembrar na splashscreen
+                        keepConected(true)
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     } else {
@@ -75,6 +76,18 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             })
+    }
+
+    private fun keepConected(save: Boolean) {
+        val editor = getSharedPreferences("meuapp", Context.MODE_PRIVATE).edit()
+        if(save) {
+            editor.putBoolean("MANTER_CONECTADO", swtConectado.isChecked)
+            editor.putString("USUARIO", edtEmail.text.toString())
+        } else {
+            editor.putBoolean("MANTER_CONECTADO", false)
+            editor.putString("USUARIO", "")
+        }
+        editor.apply()
     }
 
 }

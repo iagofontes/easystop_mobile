@@ -1,5 +1,6 @@
 package br.com.iagofontes.easystop
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -18,7 +19,13 @@ class InitialActivity : AppCompatActivity() {
         setContentView(R.layout.activity_initial)
 
         Handler().postDelayed({
-            startActivity(Intent(this@InitialActivity, LoginActivity::class.java))
+
+            val sharedPreferences = getSharedPreferences("meuapp", Context.MODE_PRIVATE)
+            if(sharedPreferences.getBoolean("MANTER_CONECTADO", false) && !sharedPreferences.getString("USUARIO", "").equals("")) {
+                startActivity(Intent(this@InitialActivity, MainActivity::class.java))
+            } else {
+                startActivity(Intent(this@InitialActivity, LoginActivity::class.java))
+            }
             finish()
         }, 4000)
 

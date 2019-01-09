@@ -1,5 +1,6 @@
 package br.com.iagofontes.easystop
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -12,6 +13,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+//        loadUserData()
     }
 
     override fun onBackPressed() {
@@ -70,6 +73,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Toast.makeText(this@MainActivity, "Dados do usuário", Toast.LENGTH_LONG).show()
             }
 
+            R.id.item_mycars -> {
+
+                myCars()
+
+            }
+
             R.id.item_about -> {
 
                 aboutApp()
@@ -90,6 +99,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 //    private fun Estacionamentos()
 
+    private fun myCars() {
+
+        startActivity(Intent(this@MainActivity, CarsActivity::class.java))
+
+    }
+
     private fun aboutApp() {
 
         startActivity(Intent(this@MainActivity, AboutActivity::class.java))
@@ -101,6 +116,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(Intent(this@MainActivity, LoginActivity::class.java))
         finish()
 
+    }
+
+    private fun loadUserData() {
+        val sharedPreferences = getSharedPreferences("meuapp", Context.MODE_PRIVATE)
+        txtUserName.text = sharedPreferences.getString("USUARIO", "").toString()
     }
 
 }
