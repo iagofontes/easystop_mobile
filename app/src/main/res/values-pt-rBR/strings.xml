@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EasyStop</string>
+    <string name="logo_image">Imagem logo</string>
+    <string name="label_password">Senha</string>
+    <string name="img_logo">Imagem logo</string>
+    <string name="btn_cadastrese">Cadastre-se</string>
+    <string name="swt_manterConectado">Manter-se Conectado</string>
+    <string name="item_about">Sobre</string>
+    <string name="item_userdata">Meus dados</string>
+    <string name="item_logout">Sair</string>
+    <string name="item_park">Estacionamentos</string>
+    <string name="item_mycars">Meus carros</string>
+    <string name="txt_mmy_vehicles">Meus Veículos</string>
+    <string name="btn_Add">Adicionar</string>
+    <string name="txt_montadora">Montadora</string>
+    <string name="txt_modelo">Modelo</string>
+    <string name="txt_ano">Ano</string>
+    <string name="txt_placa">Placa</string>
+    <string name="title_register">Cadastre-se</string>
+    <string name="title_about">Sobre</string>
+    <string name="title_vehicles">Meus Veículos</string>
+    <string name="title_myVehicle">Meu Veículo</string>
+    <string name="logo_app_descr">Logo do aplicativo</string>
+    <string name="lbl_descr_app">Olá, seja bem vindo ao EasyStop. Esse é o app que irá facilitar a vida de quem busca
+        estacionamentos próximos ao seu destino.
+    </string>
+</resources>

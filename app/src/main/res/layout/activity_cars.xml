@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,4 +7,17 @@
         android:layout_height="match_parent"
         tools:context=".CarsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/content_lista"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:id="@+id/fabAddVehicle" android:focusable="true"
+            app:srcCompat="@android:drawable/ic_menu_add"/>
+    <!--android:clickable="true" app:srcCompat="@android:drawable/ic_menu_add"-->
+
+
+</android.support.design.widget.CoordinatorLayout>

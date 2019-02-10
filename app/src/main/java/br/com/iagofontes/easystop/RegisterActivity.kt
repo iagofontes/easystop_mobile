@@ -3,10 +3,13 @@ package br.com.iagofontes.easystop
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import br.com.iagofontes.easystop.api.EasyStopAPI
 import br.com.iagofontes.easystop.model.BasicReturn
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.google.gson.Gson
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_register.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -63,7 +66,7 @@ class RegisterActivity : AppCompatActivity() {
                 .enqueue(object : Callback<BasicReturn> {
 
                     override fun onFailure(call: Call<BasicReturn>, t: Throwable?) {
-                        Toast.makeText(this@RegisterActivity, t?.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@RegisterActivity, "Problemas ao realizar registro.", Toast.LENGTH_LONG).show()
                     }
 
                     override fun onResponse(call: Call<BasicReturn>, response: Response<BasicReturn>?) {
@@ -71,7 +74,7 @@ class RegisterActivity : AppCompatActivity() {
                             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                             finish()
                         } else {
-                            Toast.makeText(this@RegisterActivity, response?.body()?.message, Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@RegisterActivity, "Verifique os dados informados.", Toast.LENGTH_LONG).show()
                         }
                     }
 

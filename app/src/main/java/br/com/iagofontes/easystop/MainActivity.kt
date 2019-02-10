@@ -2,6 +2,7 @@ package br.com.iagofontes.easystop
 
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -11,6 +12,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import br.com.iagofontes.easystop.dao.BancoDeDados
+import br.com.iagofontes.easystop.model.Usuario
+import com.facebook.stetho.inspector.domstorage.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
@@ -18,14 +22,10 @@ import kotlinx.android.synthetic.main.nav_header_main.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-//        loadUserData()
+
     }
 
     override fun onBackPressed() {
@@ -97,8 +97,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-//    private fun Estacionamentos()
-
     private fun myCars() {
 
         startActivity(Intent(this@MainActivity, CarsActivity::class.java))
@@ -118,9 +116,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    private fun loadUserData() {
-        val sharedPreferences = getSharedPreferences("meuapp", Context.MODE_PRIVATE)
-        txtUserName.text = sharedPreferences.getString("USUARIO", "").toString()
+
+    private fun removeUser( usuario: Usuario ) {
+
+        if(!getSharedPreferences("meuapp", Context.MODE_PRIVATE).getBoolean("MANTER_CONECTADO", false)) {
+            val db = BancoDeDados.getDatabase(this)
+            if (usuario.codigo > 0)
+                InsertAsyncTask(db!!, 2).execute(usuario)
+        }
+
+    }
+
+    private inner class InsertAsyncTask internal constructor(appDatabase: BancoDeDados, operationCode: Int) : AsyncTask<Usuario, Void, String>() {
+        /*
+
+        >>> OPERATION CODE           <<<
+        >>> 1 = INSERIR NOVO USUARIO <<<
+        >>> 2 = REMOVER USUARIO      <<<
+
+         */
+        private val db: BancoDeDados = appDatabase
+        private val operCode: Int = operationCode
+        override fun doInBackground(vararg params: Usuario): String {
+            if(operCode == 1)
+                db.usuarioDAO().inserir(params[0])
+            else if(operCode == 2)
+                db.usuarioDAO().apagar(params[0])
+            return ""
+
+        }
     }
 
 }

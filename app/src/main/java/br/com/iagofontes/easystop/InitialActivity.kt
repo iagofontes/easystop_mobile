@@ -5,8 +5,10 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import kotlinx.android.synthetic.main.activity_initial.*
 
 class InitialActivity : AppCompatActivity() {
 
@@ -21,7 +23,11 @@ class InitialActivity : AppCompatActivity() {
         Handler().postDelayed({
 
             val sharedPreferences = getSharedPreferences("meuapp", Context.MODE_PRIVATE)
-            if(sharedPreferences.getBoolean("MANTER_CONECTADO", false) && !sharedPreferences.getString("USUARIO", "").equals("")) {
+            if(
+                (sharedPreferences.getBoolean("MANTER_CONECTADO", false)) &&
+                (!sharedPreferences.getString("USUARIO", "").equals("")) &&
+                (!sharedPreferences.getString("DRIVERID", "").equals(""))
+            ) {
                 startActivity(Intent(this@InitialActivity, MainActivity::class.java))
             } else {
                 startActivity(Intent(this@InitialActivity, LoginActivity::class.java))
@@ -30,4 +36,8 @@ class InitialActivity : AppCompatActivity() {
         }, 4000)
 
     }
+
+
+
+
 }

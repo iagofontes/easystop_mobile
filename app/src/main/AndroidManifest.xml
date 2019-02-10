@@ -6,9 +6,9 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/logo_easy_stop"
             android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
+            android:roundIcon="@mipmap/logo_easy_stop_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
@@ -24,22 +24,26 @@
                 android:name=".LoginActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".EstacionamentosActivity">
-        </activity>
-        <activity android:name=".RegisterActivity">
+        <activity
+                android:name=".RegisterActivity"
+                android:label="@string/title_register">
         </activity>
         <activity
                 android:name=".MainActivity"
                 android:label="@string/title_activity_main"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".AboutActivity">
+        <activity
+                android:name=".AboutActivity"
+                android:label="@string/title_about">
         </activity>
         <activity
-                android:name=".PrincipalActivity"
-                android:label="@string/title_activity_principal">
+                android:name=".CarsActivity"
+                android:label="@string/title_vehicles">
         </activity>
-        <activity android:name=".CarsActivity">
+        <activity
+                android:name=".InformationActivity"
+                android:label="@string/title_myVehicle">
         </activity>
     </application>
 
